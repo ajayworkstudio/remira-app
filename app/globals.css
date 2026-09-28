@@ -1,0 +1,278 @@
+@import "tailwindcss";
+
+/* Class-based dark mode, driven by next-themes (System / Light / Dark) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   REMIRA DESIGN TOKENS
+   All colors live here. Components reference semantic tokens
+   (bg-surface, text-ink, text-muted, bg-brand ...) only.
+   ============================================================ */
+:root {
+  --brand: #0f766e;
+  --brand-strong: #0b5e57;
+  --brand-2: #14b8a6;
+  --brand-soft: #ccfbf1;
+  --brand-softer: #e8faf6;
+  --on-brand: #ffffff;
+
+  --bg: #f7faf9;
+  --surface: #ffffff;
+  --surface-2: #f1f6f4;
+  --ink: #12302d;
+  --muted: #6b7c79;
+  --subtle: #9aaaa7;
+  --line: #e5efec;
+
+  --warning: #b45309;
+  --warning-soft: #fef3c7;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --success: #15803d;
+  --success-soft: #dcfce7;
+
+  /* Priority accents (subtle, never aggressive) */
+  --prio-low: #64748b;
+  --prio-medium: #0e7490;
+  --prio-high: #c2410c;
+
+  /* Apple Calendar / external events */
+  --external: #6d5bd0;
+  --external-soft: #ece9fb;
+
+  --shadow-card: 0 1px 2px rgb(18 48 45 / 0.04), 0 8px 24px -12px rgb(18 48 45 / 0.12);
+  --shadow-float: 0 12px 32px -8px rgb(15 118 110 / 0.45);
+  --hero-gradient: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+  --page-glow: radial-gradient(1200px 500px at 85% -10%, rgb(20 184 166 / 0.10), transparent 60%);
+
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --nav-height: 64px;
+}
+
+.dark {
+  --brand: #2dd4bf;
+  --brand-strong: #5eead4;
+  --brand-2: #14b8a6;
+  --brand-soft: #123a36;
+  --brand-softer: #0f2926;
+  --on-brand: #04201d;
+
+  --bg: #0b1413;
+  --surface: #121e1c;
+  --surface-2: #182725;
+  --ink: #e6f2ef;
+  --muted: #93a8a4;
+  --subtle: #6b807c;
+  --line: #22322f;
+
+  --warning: #fbbf24;
+  --warning-soft: #3a2c0c;
+  --danger: #f87171;
+  --danger-soft: #3b1616;
+  --success: #4ade80;
+  --success-soft: #0f2e1b;
+
+  --prio-low: #94a3b8;
+  --prio-medium: #67e8f9;
+  --prio-high: #fb923c;
+
+  --external: #a99cf5;
+  --external-soft: #211d3d;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.5);
+  --shadow-float: 0 12px 32px -8px rgb(45 212 191 / 0.35);
+  --hero-gradient: linear-gradient(135deg, #0f5c56 0%, #0f766e 100%);
+  --page-glow: radial-gradient(1200px 500px at 85% -10%, rgb(45 212 191 / 0.07), transparent 60%);
+}
+
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-2: var(--brand-2);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-softer: var(--brand-softer);
+  --color-on-brand: var(--on-brand);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-prio-low: var(--prio-low);
+  --color-prio-medium: var(--prio-medium);
+  --color-prio-high: var(--prio-high);
+  --color-external: var(--external);
+  --color-external-soft: var(--external-soft);
+
+  --shadow-card: var(--shadow-card);
+  --shadow-float: var(--shadow-float);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI Variable", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius-card: 1.25rem;
+  --radius-sheet: 1.75rem;
+
+  /* Typography scale */
+  --text-display: 2.25rem;
+  --text-display--line-height: 2.6rem;
+  --text-display--letter-spacing: -0.03em;
+  --text-large: 1.75rem;
+  --text-large--line-height: 2.1rem;
+  --text-large--letter-spacing: -0.025em;
+  --text-title: 1.25rem;
+  --text-title--line-height: 1.6rem;
+  --text-title--letter-spacing: -0.015em;
+  --text-headline: 1.0625rem;
+  --text-headline--line-height: 1.4rem;
+  --text-body: 0.9375rem;
+  --text-body--line-height: 1.4rem;
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.15rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+
+  --animate-rise: rise 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-sheet: sheet 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-fade: fade 0.2s ease-out both;
+  --animate-pop: pop 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes sheet {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pop {
+  0% { transform: scale(0.6); }
+  100% { transform: scale(1); }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  color-scheme: light;
+}
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--page-glow), var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+/* Keep native date/time inputs legible and tappable on iOS */
+input[type="date"],
+input[type="time"] {
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 2.75rem;
+}
+input,
+textarea,
+select {
+  font-size: 16px; /* prevents iOS zoom on focus */
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+::selection {
+  background: var(--brand-soft);
+}
+
+@utility pt-safe {
+  padding-top: max(var(--safe-top), 0px);
+}
+@utility pb-safe {
+  padding-bottom: var(--safe-bottom);
+}
+@utility pb-nav {
+  padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 1.5rem);
+}
+@utility bottom-nav-offset {
+  bottom: calc(var(--nav-height) + var(--safe-bottom) + 1rem);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@utility bg-hero {
+  background: var(--hero-gradient);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Category palette (referenced by name, e.g. color = "teal")
+   ============================================================ */
+:root {
+  --cat-teal: #0f766e;
+  --cat-cyan: #0e7490;
+  --cat-sky: #0369a1;
+  --cat-indigo: #4338ca;
+  --cat-violet: #6d28d9;
+  --cat-pink: #be185d;
+  --cat-rose: #be123c;
+  --cat-orange: #c2410c;
+  --cat-amber: #b45309;
+  --cat-lime: #4d7c0f;
+  --cat-emerald: #047857;
+  --cat-slate: #475569;
+}
+.dark {
+  --cat-teal: #2dd4bf;
+  --cat-cyan: #22d3ee;
+  --cat-sky: #38bdf8;
+  --cat-indigo: #a5b4fc;
+  --cat-violet: #c4b5fd;
+  --cat-pink: #f9a8d4;
+  --cat-rose: #fda4af;
+  --cat-orange: #fdba74;
+  --cat-amber: #fcd34d;
+  --cat-lime: #bef264;
+  --cat-emerald: #6ee7b7;
+  --cat-slate: #cbd5e1;
+}
+.cat-tint {
+  color: var(--cat, var(--cat-teal));
+  background: color-mix(in oklab, var(--cat, var(--cat-teal)) 12%, transparent);
+}
+.cat-dot {
+  background: var(--cat, var(--cat-teal));
+}
